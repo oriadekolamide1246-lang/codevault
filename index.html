@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeVault - Modern Programming & Development Resources</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00d4ff;
+            --primary-dark: #0099cc;
+            --secondary: #ff006e;
+            --dark-bg: #0a0e27;
+            --card-bg: #1a1f3a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0bec5;
+            --accent: #ffd60a;
+            --border: #2a3f5f;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #161d36 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 1.5rem auto 2rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--dark-bg);
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* CONTENT GRID WITH AD UNIT */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            margin: 4rem 0;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .content-section {
+            background: rgba(26, 31, 58, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .content-section:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+        }
+
+        .content-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .feature-card {
+            background: rgba(10, 14, 39, 0.5);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--secondary);
+            background: rgba(255, 0, 110, 0.05);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        /* AD UNIT SECTION - PRIMARY SIDEBAR */
+        .ad-unit-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .ad-unit {
+            background: rgba(26, 31, 58, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px dashed var(--primary);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ad-unit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            100% {
+                left: 100%;
+            }
+        }
+
+        .ad-unit-label {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ad-unit-label h3 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .ad-unit-label p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .ad-code-placeholder {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 4px;
+            padding: 0.8rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            color: var(--primary);
+            max-width: 100%;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .ad-info {
+            background: rgba(255, 214, 10, 0.05);
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        .ad-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0.5rem 0;
+        }
+
+        /* STICKY AD UNIT (appears on scroll) */
+        .sticky-ad {
+            position: sticky;
+            top: 100px;
+        }
+
+        /* FOOTER AD SECTION */
+        .footer-ad-section {
+            background: rgba(26, 31, 58, 0.6);
+            border: 2px dashed var(--primary);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-ad-section h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: rgba(10, 14, 39, 0.95);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .ad-unit {
+                min-height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">💻 CodeVault</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <h1>Master Modern Programming & Development</h1>
+        <p>Learn cutting-edge programming languages, frameworks, and best practices. From web development to cloud computing, level up your coding skills with CodeVault.</p>
+        <div class="cta-buttons">
+            <button class="btn btn-primary">Get Started</button>
+            <button class="btn btn-secondary">Learn More</button>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT WITH AD UNIT -->
+    <div class="container">
+        <div class="content-grid">
+            <!-- MAIN CONTENT COLUMN -->
+            <div class="main-content">
+                <!-- FEATURES SECTION -->
+                <section class="content-section" id="features">
+                    <h2>🚀 Developer Tools & Features</h2>
+                    <p>Comprehensive resources for modern developers. Our platform provides everything you need to build, deploy, and scale your applications.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h3>Fast Learning</h3>
+                            <p>Master concepts quickly with practical examples</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🔒</div>
+                            <h3>Secure Code</h3>
+                            <p>Best practices for writing secure applications</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🌐</div>
+                            <h3>Full Stack</h3>
+                            <p>Frontend, backend, and database mastery</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📦</div>
+                            <h3>DevOps Ready</h3>
+                            <p>Deployment and infrastructure guides</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CONTENT SECTION -->
+                <section class="content-section" id="resources">
+                    <h2>📚 Programming Resources & Tutorials</h2>
+                    <p>Access our extensive library of coding tutorials, documentation, and real-world projects. Learn from experienced developers and build production-ready applications.</p>
+                    <ul style="margin-top: 1rem; margin-left: 1.5rem; color: var(--text-secondary);">
+                        <li style="margin-bottom: 0.8rem;">In-depth video tutorials on JavaScript, Python, React, Node.js, and more</li>
+                        <li style="margin-bottom: 0.8rem;">Complete guides for web development, mobile apps, and cloud deployment</li>
+                        <li style="margin-bottom: 0.8rem;">Code snippets, best practices, and architectural patterns</li>
+                        <li style="margin-bottom: 0.8rem;">Community forum and expert Q&A support</li>
+                    </ul>
+                </section>
+
+                <!-- CONTACT SECTION -->
+                <section class="content-section" id="contact">
+                    <h2>💬 Get In Touch</h2>
+                    <p>Have questions? We'd love to hear from you. Reach out and let's start a conversation.</p>
+                    <form style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                        <input type="text" placeholder="Your Name" style="padding: 0.8rem; background: rgba(10, 14, 39, 0.5); border: 1px solid var(--border); border-radius: 4px; color: var(--text-primary);">
+                        <input type="email" placeholder="Your Email" style="padding: 0.8rem; background: rgba(10, 14, 39, 0.5); border: 1px solid var(--border); border-radius: 4px; color: var(--text-primary);">
+                        <textarea placeholder="Your Message" rows="4" style="padding: 0.8rem; background: rgba(10, 14, 39, 0.5); border: 1px solid var(--border); border-radius: 4px; color: var(--text-primary); font-family: inherit;"></textarea>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </section>
+            </div>
+
+            <!-- AD UNIT SIDEBAR -->
+            <aside class="ad-unit-section sticky-ad">
+                <!-- PRIMARY AD UNIT PLACEHOLDER -->
+                <div class="ad-unit">
+                    <div class="ad-unit-label">
+                        <h3>📺 Advertisement</h3>
+                        <p>300x250 Ad Unit</p>
+                        <div class="ad-code-placeholder">&lt;!-- PASTE YOUR ADS TERRA CODE HERE --&gt;
+&lt;script&gt;
+// Your Ads Terra ad code
+// goes here
+&lt;/script&gt;</div>
+                    </div>
+                </div>
+
+                <!-- AD INFO BOX -->
+                <div class="ad-info">
+                    <p><strong>💡 Ad Placement Tips:</strong></p>
+                    <p>• Place ads above the fold for better visibility</p>
+                    <p>• Keep ads relevant to your content</p>
+                    <p>• Test different formats for best CPM</p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- FOOTER AD SECTION -->
+        <section class="footer-ad-section">
+            <h3>📢 Featured Advertisement Space</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Perfect for high-impact banner or smartlink ads</p>
+            <div class="ad-unit" style="min-height: 200px;">
+                <div class="ad-unit-label">
+                    <p>728x90 Banner / Smartlink Ad Unit</p>
+                    <div class="ad-code-placeholder">&lt;!-- PASTE BANNER/SMARTLINK AD CODE HERE --&gt;</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Career</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Tutorials</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CodeVault. All rights reserved. | Monetized with Ads Terra</p>
+        </div>
+    </footer>
+</body>
+</html>
